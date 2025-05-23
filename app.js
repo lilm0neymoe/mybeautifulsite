@@ -363,10 +363,17 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
   };
   
   window.getSpotifyAuthURL = getSpotifyAuthURL;
-  
-  document.getElementById("login-btn")?.addEventListener("click", () => {
-    window.location.href = getSpotifyAuthURL();
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const loginBtn = document.getElementById("login-btn");
+    if (loginBtn) {
+      loginBtn.addEventListener("click", () => {
+        console.log("Login clicked. Redirecting to:", getSpotifyAuthURL());
+        window.location.href = getSpotifyAuthURL();
+      });
+    }
   });
+  
   
   console.log("app.js loaded");
   console.log("Redirect URI being used:", getSpotifyAuthURL());
