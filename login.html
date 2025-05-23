@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="loginpage.css" />
+  <link rel="stylesheet" href="loginpage.css">
 </head>
 <body>
   <main class="login-container">
     <section class="login-left">
       <figure class="user-icon">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User profile icon" />
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User profile icon">
       </figure>
       <h2>Welcome!</h2>
       <p>Log in for the ultimate Spotify stat center</p>
     </section>
-    <hr class="line" />
+    <hr class="line">
     <section class="login-right">
       <h1>Login with Spotify</h1>
       <button id="login-btn" aria-label="Log in using your Spotify account">
@@ -25,14 +25,11 @@
     </section>
   </main>
 
-  <!-- ✅ This script handles Spotify login -->
   <script type="module">
-    import { getSpotifyAuthURL } from './app.js'; // Assuming getSpotifyAuthURL is exported here
+    import { getSpotifyAuthURL } from "./auth.js";
 
     document.getElementById("login-btn").addEventListener("click", () => {
-      const authUrl = getSpotifyAuthURL();
-      console.log("Redirecting to:", authUrl);
-      window.location.href = authUrl;
+      window.location.href = getSpotifyAuthURL();
     });
   </script>
 </body>

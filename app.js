@@ -1,34 +1,13 @@
 //VIKTIGT!!! Funktioner som loadposts etc... som har med customization och kommentar funktioner är endast testnings funktioner som inte följde med till slut projktet, har kvar dem pga vill utveckla ksk
 
 // firebase import
-// ✅ FIRST import and initialize Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, getDoc, collection, getDocs, addDoc, updateDoc, query, orderBy, deleteField, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAOjXDQ6VBEewJ13MuD4rWK3R0vjNeRkKY",
-  authDomain: "teschting-e95b3.firebaseapp.com",
-  projectId: "teschting-e95b3",
-  storageBucket: "teschting-e95b3.appspot.com",
-  messagingSenderId: "442828376755",
-  appId: "1:442828376755:web:6b59970b5e42ec34a77ec6",
-  measurementId: "G-44KDYP4C4Z"
-};
-
-const app = initializeApp(firebaseConfig); // ✅ Must happen first
-
-// ✅ THEN import Firestore and Storage AFTER init
-import {
-  getFirestore, doc, getDoc, collection, getDocs, addDoc, updateDoc, query, orderBy, deleteField, setDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import {
-  getStorage, ref, uploadBytes, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
-// ✅ Then call them with the app
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-
+  
+  
+  const db = getFirestore();
+  const storage = getStorage();
   
   // spotify config
   const CLIENT_ID = "5ae6a0ba7af34db8b236a21abf9a83e6"; // ✅ matches dashboardg
@@ -370,32 +349,24 @@ const storage = getStorage(app);
   })
 
   window.onload = () => {
+    const banner = document.getElementById("top-banner");
     extractAndStoreToken();
   
     const token = getAccessToken();
     if (token) {
+      // If a valid token exists, continue with the usual process
       fetchUserProfile();
       loadPosts();
       fetchRecentlyPlayed();
       setInterval(fetchRecentlyPlayed, 30000);
     } else {
+      // No token found, redirect to the login page
       window.location.href = "/mybeautifulsite/login.html";
     }
   };
   
-  window.getSpotifyAuthURL = getSpotifyAuthURL;
-
-  window.addEventListener("DOMContentLoaded", () => {
-    const loginBtn = document.getElementById("login-btn");
-    if (loginBtn) {
-      loginBtn.addEventListener("click", () => {
-        console.log("Login clicked. Redirecting to:", getSpotifyAuthURL());
-        window.location.href = getSpotifyAuthURL();
-      });
-    }
-  });
-  
   
   console.log("app.js loaded");
   console.log("Redirect URI being used:", getSpotifyAuthURL());
+
   
