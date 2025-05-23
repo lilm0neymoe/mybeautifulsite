@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <link rel="stylesheet" href="loginpage.css" />
 </head>
@@ -25,7 +25,15 @@
     </section>
   </main>
 
-  <!-- ✅ Load the main app logic -->
-  <script type="module" src="app.js"></script>
+  <!-- ✅ This script handles Spotify login -->
+  <script type="module">
+    import { getSpotifyAuthURL } from './app.js'; // Assuming getSpotifyAuthURL is exported here
+
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const authUrl = getSpotifyAuthURL();
+      console.log("Redirecting to:", authUrl);
+      window.location.href = authUrl;
+    });
+  </script>
 </body>
 </html>

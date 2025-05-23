@@ -1,16 +1,9 @@
 //VIKTIGT!!! Funktioner som loadposts etc... som har med customization och kommentar funktioner är endast testnings funktioner som inte följde med till slut projktet, har kvar dem pga vill utveckla ksk
 
 // firebase import
-// Firebase imports FIRST
+// ✅ FIRST import and initialize Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getFirestore, doc, getDoc, collection, getDocs, addDoc, updateDoc, query, orderBy, deleteField, setDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import {
-  getStorage, ref, uploadBytes, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-// ✅ THEN initialize
 const firebaseConfig = {
   apiKey: "AIzaSyAOjXDQ6VBEewJ13MuD4rWK3R0vjNeRkKY",
   authDomain: "teschting-e95b3.firebaseapp.com",
@@ -21,9 +14,20 @@ const firebaseConfig = {
   measurementId: "G-44KDYP4C4Z"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig); // ✅ Must happen first
+
+// ✅ THEN import Firestore and Storage AFTER init
+import {
+  getFirestore, doc, getDoc, collection, getDocs, addDoc, updateDoc, query, orderBy, deleteField, setDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+// ✅ Then call them with the app
 const db = getFirestore(app);
 const storage = getStorage(app);
+
 
   
   // spotify config
