@@ -10,7 +10,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
   const storage = getStorage();
   
   // spotify config
-  const CLIENT_ID = "5ae6a0ba7af34db8b236a21abf9a83e6";
+  const CLIENT_ID = "5ae60b0a7ef3d4c8b826a21abf9a83e6"; // ✅ matches dashboard
   const REDIRECT_URI = "https://lilm0neymoe.github.io/mybeautifulsite/set_username.html";
   const AUTH_URL = "https://accounts.spotify.com/authorize";
   const SCOPES = "user-read-private user-top-read user-read-recently-played";
