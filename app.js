@@ -1,13 +1,30 @@
 //VIKTIGT!!! Funktioner som loadposts etc... som har med customization och kommentar funktioner är endast testnings funktioner som inte följde med till slut projktet, har kvar dem pga vill utveckla ksk
 
 // firebase import
-import { getFirestore, doc, getDoc, collection, getDocs, addDoc, updateDoc, query, orderBy, deleteField, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+// Firebase imports FIRST
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore, doc, getDoc, collection, getDocs, addDoc, updateDoc, query, orderBy, deleteField, setDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-  
-  
-  const db = getFirestore();
-  const storage = getStorage();
+// ✅ THEN initialize
+const firebaseConfig = {
+  apiKey: "AIzaSyAOjXDQ6VBEewJ13MuD4rWK3R0vjNeRkKY",
+  authDomain: "teschting-e95b3.firebaseapp.com",
+  projectId: "teschting-e95b3",
+  storageBucket: "teschting-e95b3.appspot.com",
+  messagingSenderId: "442828376755",
+  appId: "1:442828376755:web:6b59970b5e42ec34a77ec6",
+  measurementId: "G-44KDYP4C4Z"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
   
   // spotify config
   const CLIENT_ID = "5ae6a0ba7af34db8b236a21abf9a83e6"; // ✅ matches dashboardg
