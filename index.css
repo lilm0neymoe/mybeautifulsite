@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(4px);
+  background-attachment:fixed;
+  -webkit-backdrop-filter: blur(4px);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  color: black;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.section-box {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.section-box h2, .section-box h3 {
+  color: black;
+  margin-bottom: 12px;
+}
+
+select {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 2px solid #1DB954;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: black;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.music-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.music-list li {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.music-list img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+
+.track-info {
+  flex-grow: 1;
+}
+
+.track-title {
+  font-weight: bold;
+  color: white;
+}
+
+.track-artist {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.track-time {
+  color: #aaa;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.button-link, button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #1DB954;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid #1DB954;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button-link:hover,
+button:hover {
+  color: white;
+  background-color: #1DB954;
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.5);
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 20px;
+  }
+
+  .section-box {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .music-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .music-list img {
+    width: 40px;
+    height: 40px;
+  }
+
+}

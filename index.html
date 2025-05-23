@@ -1,0 +1,92 @@
+<!-- DETTA ÄR MEST TEST SIDAN, FINNS DELAR SOM EJ ANVÄNDS I SLUT PRODUKTEN -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lol</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+        <main class="main-container">
+            <section class="section-box">
+                <h2 id="user-status">Loading user...</h2>
+                <a href="recap.html" class="button-link">Monthly Recap</a>
+                <button id="login-btn">Login with Spotify</button>
+                <button id="logout-btn" style="display: none;">Logout</button>
+                <form id="username-setup" style="display: none;">
+                    <h2>Set Your Username</h2>
+                    <input type="text" id="username-input" placeholder="Choose a username">
+                    <button id="save-username-btn">Save Username</button>
+                </form>
+            </section>
+            <section class="section-box">
+                <h3>Recently Played (Last 10 Songs)</h3>  
+                    <ul id="recently-played" class="music-list"></ul>
+            </section>
+            <section class="section-box">
+            <h2>All Stats</h2>
+                <label for="time-range">Select Time Range:</label>
+                <select id="time-range">
+                    <option value="short_term">Last 4 Weeks</option>
+                    <option value="medium_term">Last 6 Months</option>
+                    <option value="long_term">All Time</option>
+                </select>       
+                <h3>Top Artists</h3>
+                    <ul id="top-artists" class="music-list" ></ul>
+                <h3>Top Songs</h3>
+                    <ul id="top-songs" class="music-list"></ul>
+                <h3>Top Albums</h3>
+                    <ul id="top-albums" class="music-list"></ul>
+            </section>
+
+            <div id="removed" class="hidden">
+                <h2>Post a Message</h2>
+                    <textarea id="post-text" placeholder="Write your message..."></textarea>
+                    <button id="submit-post">Post</button>
+                <h2>Recent Posts</h2>
+                    <ul id="post-list"></ul>
+                <h2>Your Profile</h2>
+                    <div id="profile-picture-container"></div>
+                <p><strong>Username:</strong> <span id="display-username">Not set</span></p>
+                    <input type="file" id="profile-pic-input" accept="image/*" >
+                    <button id="upload-pic-btn">Upload Picture</button >
+                    <img id="profile-pic" src="default-avatar.png" alt="Profile Picture" width="100" height="100">
+            </div>
+        </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAOjXDQ6VBEewJ13MuD4rWK3R0vjNeRkKY",
+            authDomain: "teschting-e95b3.firebaseapp.com",
+            projectId: "teschting-e95b3",
+            storageBucket: "teschting-e95b3.appspot.com",
+            messagingSenderId: "442828376755",
+            appId: "1:442828376755:web:6b59970b5e42ec34a77ec6",
+            measurementId: "G-44KDYP4C4Z"
+        };
+
+        // Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // global firebase för app.js
+        window.db = db;
+        window.doc = doc;
+        window.setDoc = setDoc;
+        window.getDoc = getDoc;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.getDocs = getDocs;
+        window.query = query;
+        window.where = where;
+        window.orderBy = orderBy;
+    </script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

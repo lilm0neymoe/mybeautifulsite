@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Username</title>
+    <link rel="stylesheet" href="loginpage.css">
+  </head>
+<body>
+  <main class="login-container">
+    <section class="login-left">
+      <figure class="user-icon">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="User Icon">
+      </figure>
+      <h2>Welcome!</h2>
+      <p>Choose your username to continue</p>
+    </section>
+    <hr class="line">
+    <section class="login-right">
+      <h1>Choose Your Username</h1>
+      <input type="text" id="username-input" class="username-input" placeholder="Enter a unique username">
+      <button id="save-username-btn">
+        <span>Save Username</span>
+        <span class="arrow">➤</span>
+      </button>
+    </section>
+  </main>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getFirestore, doc, setDoc, getDoc, collection, getDocs, query, where
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAOjXDQ6VBEewJ13MuD4rWK3R0vjNeRkKY",
+      authDomain: "teschting-e95b3.firebaseapp.com",
+      projectId: "teschting-e95b3",
+      storageBucket: "teschting-e95b3.appspot.com",
+      messagingSenderId: "442828376755",
+      appId: "1:442828376755:web:6b59970b5e42ec34a77ec6",
+      measurementId: "G-44KDYP4C4Z"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // hämta min lilla token
+    function getAccessToken() {
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const tokenFromHash = params.get("access_token");
+
+      if (tokenFromHash) {
+        const expiresIn = 3600 * 1000;
+        const expiresAt = Date.now() + expiresIn;
+        localStorage.setItem("spotify_token", tokenFromHash);
+        localStorage.setItem("spotify_token_expires", expiresAt.toString());
+        window.history.replaceState(null, null, window.location.pathname);
+        return tokenFromHash;
+      }
+
+      const storedToken = localStorage.getItem("spotify_token");
+      const expiresAt = localStorage.getItem("spotify_token_expires");
+
+      if (!storedToken || !expiresAt || Date.now() > parseInt(expiresAt)) {
+        alert("logga in igen");
+        localStorage.clear();
+        window.location.href = "login.html";
+        return null;
+      }
+
+      return storedToken;
+    }
+
+    // ny användare till firebase
+    async function saveUserToDatabase(userId, displayName, chosenUsername) {
+      const usernamesRef = collection(db, "users");
+      const q = query(usernamesRef, where("custom_username", "==", chosenUsername));
+      const taken = await getDocs(q);
+
+      if (!taken.empty) {
+        alert("redan tagit, testa en ny");
+        return;
+      }
+
+      await setDoc(doc(db, "users", userId), {
+        spotify_id: userId,
+        name: displayName,
+        custom_username: chosenUsername,
+        created_at: new Date().toISOString()
+      });
+
+      window.location.href = "recap.html";
+    }
+
+    // användare finns elr ej
+    async function checkUserStatusAndRedirect(token) {
+  if (localStorage.getItem("just_signed_up") === "true") {
+    localStorage.removeItem("just_signed_up"); 
+    return; 
+  }
+
+  try {
+    console.log("TOKEN BEING USED:", token);
+
+    const res = await fetch("https://api.spotify.com/v1/me", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (res.status === 403) {
+      alert("Access denied by Spotify. Please re-login.");
+      localStorage.clear();
+      window.location.href = "login.html"; // skicka till login
+      return;
+    }
+
+    if (!res.ok) throw new Error("Failed to fetch Spotify user info");
+
+    const user = await res.json();
+    const userRef = doc(db, "users", user.id);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+      await setDoc(userRef, {
+        spotify_id: user.id,
+        name: user.display_name || "",
+        custom_username: "",
+        created_at: new Date().toISOString()
+      });
+    } else {
+      const userData = userSnap.data();
+      if (userData.custom_username && userData.custom_username.trim() !== "") {
+        window.location.href = "recap.html"; 
+        return;
+      }
+    }
+
+    document.getElementById("username-input").style.display = "block";
+    document.getElementById("save-username-btn").style.display = "inline-block";
+
+    document.getElementById("save-username-btn").addEventListener("click", async () => {
+      const username = document.getElementById("username-input").value.trim();
+      if (!username) return alert("Please enter a username!");
+
+      try {
+        const userRes = await fetch("https://api.spotify.com/v1/me", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!userRes.ok) throw new Error("Failed to fetch Spotify user info");
+
+        const userData = await userRes.json();
+        await saveUserToDatabase(userData.id, userData.display_name || "", username);
+      } catch (err) {
+        console.error("Error saving username:", err);
+        alert("Failed to save username.");
+      }
+    });
+
+  } catch (err) {
+    console.error("Error checking user status:", err);
+    alert("Something went wrong while checking your account.");
+  }
+}
+
+
+    // initialaize
+    async function init() {
+      const token = getAccessToken();
+      if (!token) return;
+
+      await checkUserStatusAndRedirect(token);
+    }
+
+    init();
+  </script>
+</body>
+</html>

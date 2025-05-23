@@ -1,0 +1,241 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom right, #cce5ff, #e6f2ff);
+  backdrop-filter: blur(4px);;
+  -webkit-backdrop-filter: blur(4px);
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-icon {
+  margin-bottom: 40px;
+}
+
+.user-icon img {
+  width: 128px;
+  height: 129px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-container {
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0);
+  background:
+  radial-gradient(circle, rgba(179, 179, 179, 0.35) 1px, transparent 1px),
+  rgba(0, 0, 0, 0.65); 
+  background-size: 6px 6px, cover;
+  border-radius: 16px;
+  padding: 40px 30px;
+  width: 640px;
+  height: 720px;
+  text-align: center;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.login-container h1 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+#login-btn, #save-username-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 10px;
+  border: 2px solid #1DB954;
+  background-color: transparent;
+  color: #1DB954;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.2s ease, color 0.3s ease;
+  width: 200%;
+}
+
+#login-btn:hover, #save-username-btn:hover{
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.4);
+}
+
+#login-btn:active, #save-username-btn:active{
+  transform: scale(1.05);
+}
+
+#login-btn::before, #save-username-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #1DB954;
+  z-index: 0;
+  transition: width 0.3s ease;
+  border-radius: 30px;
+}
+
+#login-btn:hover::before,
+#save-username-btn:hover::before {
+  width: 100%;
+}
+
+
+#login-btn span, #save-username-btn span {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+#login-btn:hover span,
+#save-username-btn:hover span {
+  color: white;
+}
+
+.login-left, .login-right {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.login-left {
+  justify-content: center;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+}
+
+.login-left h2 {
+  width: 100%;    
+  text-align: center; 
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.login-left p {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.login-right {
+  height: 60%;
+  padding-top: 60px;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.login-right h2 {
+  margin-bottom: 20px;
+}
+
+.line{
+  width: 75%;
+}
+
+.username-input {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: 2px solid #1DB954;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 20px;
+  outline: none;
+  backdrop-filter: blur(6px);
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.username-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.username-input:focus {
+  border-color: #1ed760;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+@media (max-width: 1024px) {
+  .login-container {
+    width: 90vw;
+    height: auto;
+    padding: 30px 20px;
+  }
+
+  .login-left h2 {
+    font-size: 28px;
+  }
+
+  .login-left p {
+    font-size: 16px;
+  }
+
+  #login-btn, #save-username-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 15px;
+  }
+
+  .username-input {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    width: 95vw;
+    padding: 20px 15px;
+    border-radius: 12px;
+  }
+
+  .login-left h2 {
+    font-size: 24px;
+  }
+
+  .login-left p {
+    font-size: 14px;
+  }
+
+  .user-icon img {
+    width: 96px;
+    height: 96px;
+  }
+
+  #login-btn, #save-username-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .username-input {
+    max-width: 100%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
