@@ -507,7 +507,7 @@ window.onload = async function () {
   
   window.changeToLayer = changeToLayer;
   window.resetLayer = resetLayer;
-  window.goToStats = () => window.location.href = "index.html";
+  window.goToStats = () => window.location.href = "/mybeautifulsite/index.html";
 
   await loadRecapData();
 };

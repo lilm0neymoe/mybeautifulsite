@@ -91,7 +91,7 @@
         created_at: new Date().toISOString()
       });
 
-      window.location.href = "recap.html";
+      window.location.href = "/mybeautifulsite/recap.html";
     }
 
     // användare finns elr ej
@@ -111,7 +111,7 @@
     if (res.status === 403) {
       alert("Access denied by Spotify. Please re-login.");
       localStorage.clear();
-      window.location.href = "login.html"; // skicka till login
+      window.location.href = "/mybeautifulsite/login.html";
       return;
     }
 
