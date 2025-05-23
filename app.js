@@ -349,31 +349,25 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
   })
 
   window.onload = () => {
-    const banner = document.getElementById("top-banner");
     extractAndStoreToken();
   
     const token = getAccessToken();
     if (token) {
-      // If a valid token exists, continue with the usual process
       fetchUserProfile();
       loadPosts();
       fetchRecentlyPlayed();
       setInterval(fetchRecentlyPlayed, 30000);
     } else {
-      // No token found, redirect to the login page
       window.location.href = "/mybeautifulsite/login.html";
     }
   };
-
+  
   window.getSpotifyAuthURL = getSpotifyAuthURL;
-
+  
   document.getElementById("login-btn")?.addEventListener("click", () => {
     window.location.href = getSpotifyAuthURL();
   });
-
-  
   
   console.log("app.js loaded");
   console.log("Redirect URI being used:", getSpotifyAuthURL());
-
   
