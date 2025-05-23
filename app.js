@@ -364,6 +364,13 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
       window.location.href = "/mybeautifulsite/login.html";
     }
   };
+
+  window.getSpotifyAuthURL = getSpotifyAuthURL;
+
+  document.getElementById("login-btn")?.addEventListener("click", () => {
+    window.location.href = getSpotifyAuthURL();
+  });
+
   
   
   console.log("app.js loaded");
