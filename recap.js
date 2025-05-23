@@ -27,7 +27,7 @@ function getAccessToken() {
 async function fetchSpotifyProfile() {
   const token = getAccessToken();
   if (!token) {
-    window.location.href = "login.html";
+    window.location.href = "/mybeautifulsite/login.html";
     return;
   }
   const res = await fetch("https://api.spotify.com/v1/me", {

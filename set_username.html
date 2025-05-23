@@ -66,7 +66,7 @@
       if (!storedToken || !expiresAt || Date.now() > parseInt(expiresAt)) {
         alert("logga in igen");
         localStorage.clear();
-        window.location.href = "login.html";
+        window.location.href = "/mybeautifulsite/login.html";
         return null;
       }
 
@@ -131,7 +131,7 @@
     } else {
       const userData = userSnap.data();
       if (userData.custom_username && userData.custom_username.trim() !== "") {
-        window.location.href = "recap.html"; 
+        window.location.href = "/mybeautifulsite/recap.html"; 
         return;
       }
     }

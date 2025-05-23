@@ -11,7 +11,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
   
   // spotify config
   const CLIENT_ID = "5ae6a0ba7af34db8b236a21abf9a83e6";
-  const REDIRECT_URI = "http://127.0.0.1:5501/set_username.html";
+  const REDIRECT_URI = "https://lilm0neymoe.github.io/mybeautifulsite/set_username.html";
   const AUTH_URL = "https://accounts.spotify.com/authorize";
   const SCOPES = "user-read-private user-top-read user-read-recently-played";
   
@@ -69,14 +69,14 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
           created_at: new Date().toISOString()
         });
   
-        window.location.href = "set_username.html";
+        window.location.href = "/mybeautifulsite/set_username.html";
         return;
       }
   
       const userData = userSnap.data();
   
       if (!userData.custom_username || userData.custom_username.trim() === "") {
-        window.location.href = "set_username.html";
+        window.location.href = "/mybeautifulsite/set_username.html";
         return;
       }
 
@@ -302,7 +302,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
   
   document.getElementById("logout-btn")?.addEventListener("click", () => {
     localStorage.clear();
-    window.location.href = "index.html";
+    window.location.href = "/mybeautifulsite/index.html";
   });
   
   document.getElementById("submit-post")?.addEventListener("click", submitPost);
@@ -361,7 +361,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
       setInterval(fetchRecentlyPlayed, 30000);
     } else {
       // No token found, redirect to the login page
-      window.location.href = "login.html";
+      window.location.href = "/mybeautifulsite/login.html";
     }
   };
   
